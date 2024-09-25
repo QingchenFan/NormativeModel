@@ -3,8 +3,8 @@ import pandas as pd
      脑区水平，统计异常脑区的个数
      脑区水平就是看这个脑区上有多少被试是正的，多少是负的。被试水平就是，一个被试，400个脑区都看，看哪些是正，哪些是负
 '''
-data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_Z_AllHCMDD.csv')
-#data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_Z_AllHCestimate.csv')
+data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_Z_AllHCMDD.csv')
+data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_Z_AllHCestimate.csv')
 
 print(data)
 sunID = data['subID']
@@ -20,4 +20,4 @@ data.insert(0, 'sunID', sunID)
 data.loc['outliers_counts']=outliers_brainRegion_subject
 
 
-data.to_csv('./Step3_Z_MDD_PositiveBrainRegionNum.csv')
+data.to_csv('./Step3_Z_AllHCestimate_PositiveBrainRegionNum.csv')

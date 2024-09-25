@@ -6,7 +6,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
 
-data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_Z_AllHCMDD.csv')
+data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_Z_AllHCMDD.csv')
 data = data.iloc[:,1:]
 
 

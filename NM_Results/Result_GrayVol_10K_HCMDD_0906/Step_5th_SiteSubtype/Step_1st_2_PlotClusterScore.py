@@ -4,7 +4,7 @@ import numpy as np
 from matplotlib.patches import Rectangle
 
 # 读取CSV文件
-df = pd.read_csv('./Step1_1_silhouette_score_Data135.csv')
+df = pd.read_csv('./Step1_1_silhouette_score.csv')
 
 # 假设CSV文件中只有一列数据，列名是 '0'
 values = df['0'].values

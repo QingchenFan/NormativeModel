@@ -30,15 +30,15 @@ def pkltocsv(Resultpath,labelpath,columnsname,opath,mark):
     df_sum.columns = columnsname
     df_sum.to_csv(opath)
 
-Resultpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/NMResults/'
-labelpath = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucII/combat/allHC_GrayVol_combat_final.csv'
+Resultpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10k_HCMDD_0906/NMResults/'
+labelpath = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucIII/combat/allHC_GrayVol_combat_final_0906.csv'
 columnsname = ['Regions','Rho_estimate', 'pRho_estimate', 'RMSE_estimate', 'SMSE_estimate', 'MAE']
-opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_ResSum.csv'
+opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_ResSum.csv'
 mark = 'AllHCestimate'
 pkltocsv(Resultpath,labelpath,columnsname,opath,mark)
 
-Resultpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/NMResults/'
-mddlabel = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucII/combat/allMDD_GrayVol_combat_final.csv'
-opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_MDD_ResSum.csv'
+Resultpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10k_HCMDD_0906/NMResults/'
+mddlabel = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucIII/combat/allMDD_GrayVol_combat_final_0906.csv'
+opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_MDD_ResSum.csv'
 mark = 'AllHCMDD'
 pkltocsv(Resultpath,mddlabel,columnsname,opath,mark)

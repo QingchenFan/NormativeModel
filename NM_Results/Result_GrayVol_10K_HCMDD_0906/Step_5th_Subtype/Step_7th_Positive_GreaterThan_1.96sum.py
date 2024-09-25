@@ -26,4 +26,4 @@ print(outliers_per_subject)
 data['sum_196'] = outliers_per_subject
 
 # 将更新后的数据框写入新的CSV文件
-data.to_csv('./step7_Subtype2_Positive_GreaterTha_196sum.csv', index=False)
+data.to_csv('./step7_Subtype2_Positive_GreaterThan_196sum.csv', index=False)

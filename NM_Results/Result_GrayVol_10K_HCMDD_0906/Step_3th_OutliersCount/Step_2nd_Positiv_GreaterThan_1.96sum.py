@@ -3,8 +3,8 @@ import pandas as pd
     被试水平，统计异常脑区的大于1.96 之和
 '''
 # 读取CSV文件，假设没有列标题，因此header=None
-data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_Z_AllHCMDD.csv')
-#data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_Z_AllHCestimate.csv')
+#data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_Z_AllHCMDD.csv')
+data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_Z_AllHCestimate.csv')
 
 sunID = data['subID']
 data = data.iloc[:,1:]
@@ -27,4 +27,4 @@ print(outliers_per_subject)
 data['sum_196'] = outliers_per_subject
 
 # 将更新后的数据框写入新的CSV文件
-data.to_csv('./Step2_Z_MDD_GreaterThan_196sum.csv', index=False)
+data.to_csv('./Step2_Z_AllHCestimate_GreaterThan_196sum.csv', index=False)

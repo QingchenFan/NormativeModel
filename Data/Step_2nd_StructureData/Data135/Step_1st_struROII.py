@@ -1,9 +1,9 @@
 import os
 import glob
-os.system(' export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
-            export SUBJECTS_DIR=/Applications/freesurfer/7.4.1/subjects;\
-            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh ;  '
-          )
+'''
+    因为 fmriprep 运行环境不同，导致输出的 freesurfer结果目录不同，所以写了两个代码来处理
+'''
+
 
 path = '/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sourcedata/freesurfer/*'
 datapath = glob.glob(path)

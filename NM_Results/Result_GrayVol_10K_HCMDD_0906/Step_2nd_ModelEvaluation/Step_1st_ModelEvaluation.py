@@ -28,7 +28,7 @@ def plotModel(ipath,opath,mark):
     # 显示图形
     plt.show()
 
-ipath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_ResSum.csv'
-opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/ModelEvaluation_SMSE.png'
-mark = 'SMSE_estimate'
+ipath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/GrayVol_ResSum.csv'
+opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0906/StaResults/ModelEvaluation_MAE.png'
+mark = 'MAE'
 plotModel(ipath,opath,mark)

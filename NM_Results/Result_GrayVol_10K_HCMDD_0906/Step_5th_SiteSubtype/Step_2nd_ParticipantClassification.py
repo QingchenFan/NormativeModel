@@ -5,7 +5,7 @@ from sklearn.metrics import silhouette_score
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.cluster import DBSCAN,AgglomerativeClustering
-alldata = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_Z_AllHCMDD_Data135.csv')
+alldata = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10k_HCMDD_0906/StaResults/GrayVol_Z_AllHCMDD.csv')
 data = alldata.iloc[:,1:]
 
 
@@ -39,10 +39,10 @@ x1 = alldata[label_pred == 1]
 # print(group)
 df = pd.DataFrame(x0)
 # print(df)
-df.to_csv('./step2_group_subtype1_data135.csv')
+df.to_csv('./step2_group_subtype1.csv')
 
 df1 = pd.DataFrame(x1)
-df1.to_csv('./step2_group_subtype2_data135.csv')
+df1.to_csv('./step2_group_subtype2.csv')
 
 # df2 = pd.DataFrame(x2)
 # df2.to_csv('./step2_group_subtype3.csv')

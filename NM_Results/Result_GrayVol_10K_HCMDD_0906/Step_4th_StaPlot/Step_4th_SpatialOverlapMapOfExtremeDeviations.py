@@ -13,8 +13,8 @@ template_data = template_image.get_fdata()
 print("Template data shape:", template_data.shape)
 
 # 加载 CSV 文件
-#csv_path = '/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step3_Z_MDD_PositiveBrainRegionNum.csv'
-csv_path = '/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step3_Z_MDD_NegativeBrainRegionNum.csv'
+csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step3_Z_AllHCestimate_PositiveBrainRegionNum.csv'
+#csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step3_Z_AllHCestimate_NegativeBrainRegionNum.csv'
 weight_data = pd.read_csv(csv_path)
 print("Weight data shape:", weight_data.shape)
 
@@ -28,7 +28,7 @@ print("Mean Z values:", mean_Zvalues)
 mapped_data = np.zeros_like(template_data)
 
 # 找到脑区对应的索引
-Regionscsv_path = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10K_HCMDD_0826/StaResults/GrayVol_ResSum.csv'
+Regionscsv_path = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol_10k_HCMDD_0906/StaResults/GrayVol_ResSum.csv'
 Regions_data = pd.read_csv(Regionscsv_path)
 region = Regions_data['Regions'][0:400]
 
@@ -52,5 +52,5 @@ scalar_axis = nib.cifti2.cifti2_axes.ScalarAxis(['meanZvalue'])
 brain_model_axis = template_image.header.get_axis(1)
 scalar_header = nib.cifti2.Cifti2Header.from_axes((scalar_axis, brain_model_axis))
 scalar_img = nib.Cifti2Image(mapped_data, header=scalar_header)
-scalar_img.to_filename('./step4_NegativeBrainRegionNum.dscalar.nii')
+scalar_img.to_filename('./step4_PositiveBrainRegionNum.dscalar.nii')
 

@@ -5,7 +5,7 @@ import pandas as pd
 '''
 # 读取CSV文件，假设没有列标题，因此header=None
 #data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_Gradient_10K_HCMDD/staResults/Gradient_Z_AllHCMDD.csv')
-data = pd.read_csv('./step2_group_subtype1.csv',index_col=0)
+data = pd.read_csv('./step2_group_subtype2.csv',index_col=0)
 
 sunID = data['subID']
 data = data.iloc[:,1:]
@@ -33,4 +33,4 @@ data.insert(0, 'sunID', sunID)
 #
 
 # 将更新后的数据框写入新的CSV文件
-data.to_csv('./step7_Subtype1_Negative_LessThan_-196sum.csv', index=False)
+data.to_csv('./step7_Subtype2_Negative_LessThan_-196sum.csv', index=False)

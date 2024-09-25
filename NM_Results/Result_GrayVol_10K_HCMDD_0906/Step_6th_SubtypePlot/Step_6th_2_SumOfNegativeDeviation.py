@@ -4,13 +4,13 @@ from scipy.stats import ttest_ind
 import pandas as pd
 
 # 假设有两组数据
-hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step2_Z_estimate_LessThan_-196sum.csv', index_col=0)
+hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step2_Z_AllHCestimate_LessThan_-196sum.csv', index_col=0)
 data = list(hc['sum_196'])
 
-asd1 = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_5th_Subtype/step7_Subtype1_Negative_LessThan_-196sum.csv', index_col=0)
+asd1 = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_5th_Subtype/step7_Subtype1_Negative_LessThan_-196sum.csv', index_col=0)
 data1 = list(asd1['sum_196'])
 
-asd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_5th_Subtype/step7_Subtype2_Negative_LessThan_-196sum.csv', index_col=0)
+asd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_5th_Subtype/step7_Subtype2_Negative_LessThan_-196sum.csv', index_col=0)
 data2 = list(asd['sum_196'])
 
 

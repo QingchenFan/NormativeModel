@@ -6,10 +6,10 @@ import pandas as pd
     被试水平 统计一个被试 大于1.96或小于-1.96 的脑区数量总和 将其画小提琴图  。比较了HC MDD 异常脑区数量的差异
 '''
 # 假设有两组数据
-hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step1_Z_estimate_GreaterOrLess_1.96num.csv', index_col=0)
+hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step1_Z_AllHCestimate_GreaterOrLess_1.96num.csv', index_col=0)
 data1 = list(hc['outliers_counts'])
 
-mdd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step1_Z_MDD_GreaterOrLess_1.96num.csv', index_col=0)
+mdd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step1_Z_MDD_GreaterOrLess_1.96num.csv', index_col=0)
 data2 = list(mdd['outliers_counts'])
 
 # 创建一个DataFrame来存储数据
@@ -30,6 +30,7 @@ t_stat, p_value = ttest_ind(data1, data2)
 # 根据p值决定是否添加星星
 alpha = 0.05
 print('p value - ',p_value)
+print('t value - ',t_stat)
 if p_value < alpha:
     # 计算横线位置
     x_min, x_max = ax.get_xlim()

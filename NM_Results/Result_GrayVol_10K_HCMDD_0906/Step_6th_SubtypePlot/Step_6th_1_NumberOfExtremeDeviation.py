@@ -4,13 +4,13 @@ from scipy.stats import ttest_ind
 import pandas as pd
 
 # 假设有两组数据
-hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step1_Z_estimate_GreaterOrLess_1.96num.csv', index_col=0)
+hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step1_Z_AllHCestimate_GreaterOrLess_1.96num.csv', index_col=0)
 data = list(hc['outliers_counts'])
 
-asd1 = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_5th_Subtype/step5_subtype1_GreaterOrLess_RegionNum_1.96num.csv', index_col=0)
+asd1 = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_5th_Subtype/step5_subtype1_GreaterOrLess_RegionNum_1.96num.csv', index_col=0)
 data1 = list(asd1['outliers_counts'])
 
-asd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_5th_Subtype/step5_subtype2_GreaterOrLess_RegionNum_1.96num.csv', index_col=0)
+asd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_5th_Subtype/step5_subtype2_GreaterOrLess_RegionNum_1.96num.csv', index_col=0)
 data2 = list(asd['outliers_counts'])
 
 

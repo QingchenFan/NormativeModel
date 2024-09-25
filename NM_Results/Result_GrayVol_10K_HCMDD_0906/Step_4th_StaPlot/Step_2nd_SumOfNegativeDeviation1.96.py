@@ -7,10 +7,10 @@ import pandas as pd
     被试水平 统计一个被试小于-1.96 的Z值之和 将其画小提琴图。比较了HC MDD Negative脑区Z值之和的差异
 '''
 # 假设有两组数据
-hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step2_Z_estimate_LessThan_-196sum.csv', index_col=0)
+hc = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step2_Z_AllHCestimate_LessThan_-196sum.csv', index_col=0)
 data1 = list(hc['sum_196'])
 print(data1)
-mdd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step2_Z_MDD_LessThan_-196sum.csv', index_col=0)
+mdd = pd.read_csv('/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step2_Z_MDD_LessThan_-196sum.csv', index_col=0)
 data2 = list(mdd['sum_196'])
 print(data2)
 # 创建一个DataFrame来存储数据
@@ -28,6 +28,7 @@ sns.violinplot(x='Group', y='Values', data=df, ax=ax, palette=palette)
 # 进行统计测试（这里使用双样本t检验）
 t_stat, p_value = ttest_ind(data1, data2)
 print('p value - ',p_value)
+print('t value - ',t_stat)
 y_min = df['Values'].min()  # 获取整个数据集的最大值
 
 plt.ylim(y_min,0)

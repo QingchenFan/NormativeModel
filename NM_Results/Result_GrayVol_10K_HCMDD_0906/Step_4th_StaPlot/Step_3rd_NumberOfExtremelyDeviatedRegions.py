@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
     被试水平，统计异常脑区个数的 人数 例如有一个脑区异常的人数 二个脑区异常的人数
 '''
 # 假设的CSV文件名和分组列名
-csv_file = '/Users/qingchen/Documents/code/NormativeModel_Result/Result_GrayVol_10K_HCMDD_0826/Step_3th_OutliersCount/Step1_Z_MDD_GreaterOrLess_1.96num.csv'
+csv_file = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/Result_GrayVol_10K_HCMDD_0906/Step_3th_OutliersCount/Step1_Z_MDD_GreaterOrLess_1.96num.csv'
 group_column = 'outliers_counts'
 
 # 读取CSV文件

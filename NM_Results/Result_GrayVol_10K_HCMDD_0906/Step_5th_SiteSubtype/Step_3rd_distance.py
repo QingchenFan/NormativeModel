@@ -4,11 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-d1 = pd.read_csv('./step2_group_subtype1_data135.csv',index_col=0)
+d1 = pd.read_csv('./step2_group_subtype1.csv',index_col=0)
 d1=d1.iloc[:,1:].values
 print(d1)
 
-d2 = pd.read_csv('./step2_group_subtype2_data135.csv',index_col=0)
+d2 = pd.read_csv('./step2_group_subtype2.csv',index_col=0)
 d2=d2.iloc[:,1:].values
 print(d2.shape)
 
@@ -27,7 +27,7 @@ print(D.shape)
 S = squareform(D)
 
 df = pd.DataFrame(S)
-df.to_csv('./step3_distance_data135.csv')
+df.to_csv('./step3_distance.csv')
 
 
 from sklearn.metrics import pairwise_distances
@@ -44,7 +44,7 @@ cbar.set_label('Euclidean distance',rotation=270,labelpad=20)
 
 # 隐藏坐标轴
 
-plt.savefig('./step3_Intersubject_data135.png',dpi=300)
+plt.savefig('./step3_Intersubject.png',dpi=300)
 
 # 显示图形
 plt.show()
