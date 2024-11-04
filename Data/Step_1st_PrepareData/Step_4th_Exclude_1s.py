@@ -1,10 +1,12 @@
 import pandas as pd
-
+# step1 统计大于三个标准差 的脑区个数
 # 读取数据文件
-file_path = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucII/combat/allHC_GrayVol_combat_temp.csv'
+file_path = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucIII/nocombat/new_combat/allHC_GrayVol_combat_new.csv'
+#file_path = "/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/StructureFeature_246/allstruc/combat/allHC_GrayVol246_combat_temp.csv"
+file_path = "/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/StructureFeature_246/allstruc/nocombat/allHCGrayVol246_sum.csv"
 data = pd.read_csv(file_path)
 subid = data['subID']
-data = data.iloc[:,5:]
+data = data.iloc[:,6:]
 
 
 # 计算每个脑区的组均值和标准差
@@ -29,7 +31,7 @@ data['abnormal_count'] = data.apply(count_abnormal_regions, axis=1)
 
 data['subID'] = subid
 # 输出带有异常脑区数量的数据
-output_file_path = './HC_abnormal_counts3st.csv'
+output_file_path = './HC_abnormal_counts3st_nocombat.csv'
 data.to_csv(output_file_path, index=False)
 
 data.head(), data['abnormal_count'].describe()

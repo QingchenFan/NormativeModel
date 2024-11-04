@@ -1,21 +1,21 @@
 import glob
 import pandas as pd
-datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/PD_stru/*')
+datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/HC_stru_brainnetom/*')
 tmp = []
 
 for i in datapath:
     print(i)
     subID = i.split('/')[-1]
 
-    rhp = i + '/' + subID+'_rh.txt'
-    rh_data = pd.read_csv(rhp,skiprows = 61, delimiter = '\t',header=None)
+    rhp = i + '/rh.BN_Atlas.txt'
+    rh_data = pd.read_csv(rhp,skiprows = 60, delimiter = '\t',header=None)
     rh_data.columns = ['Column1']
     rh_data = rh_data['Column1'].str.split(n=9, expand=True)
     rh_data.columns = ['StructName', 'NumVert', 'SurfArea' ,'GrayVol', 'ThickAvg', 'ThickStd', 'MeanCurv', 'GausCurv', 'FoldInd', 'CurvInd']
     rh = rh_data[['StructName','GrayVol']].T
 
-    lhp = i + '/' + subID + '_lh.txt'
-    lh_data = pd.read_csv(lhp,skiprows = 61, delimiter = '\t',header=None)
+    lhp = i + '/lh.BN_Atlas.txt'
+    lh_data = pd.read_csv(lhp,skiprows = 60, delimiter = '\t',header=None)
     lh_data.columns = ['Column1']
     lh_data = lh_data['Column1'].str.split(n=9, expand=True)
     lh_data.columns = ['StructName', 'NumVert', 'SurfArea' ,'GrayVol', 'ThickAvg', 'ThickStd', 'MeanCurv', 'GausCurv', 'FoldInd', 'CurvInd']

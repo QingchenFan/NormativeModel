@@ -1,9 +1,6 @@
 import os
 import glob
-os.system(' export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
-            export SUBJECTS_DIR=/Applications/freesurfer/7.4.1/subjects;\
-            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh ;  '
-          )
+
 
 path = '/Volumes/QCII/duilie_processed/duilie_MDD_fmriprep/sourcedata/freesurfer/*'
 datapath = glob.glob(path)

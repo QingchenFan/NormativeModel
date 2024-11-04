@@ -1,6 +1,6 @@
 import glob
 import pandas as pd
-datapath = glob.glob('/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature/*/*_GrayVol.csv') # TODO: ThickAvg / SurfArea / GrayVol
+datapath = glob.glob('/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature_Brainnetom/*/*_GrayVol.csv') # TODO: ThickAvg / SurfArea / GrayVol
 
 
 # 读取第一个 CSV 文件，获取列名
@@ -19,4 +19,4 @@ for file in datapath:
 
 # 打印拼接后的数据
 print(concatenated_data)
-concatenated_data.to_csv('./DLMDD_GrayVol.csv') # TODO: ThickAvg / SurfArea / GrayVol
+concatenated_data.to_csv('./DLMDD_GrayVol_246.csv') # TODO: ThickAvg / SurfArea / GrayVol

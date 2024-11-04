@@ -2,7 +2,7 @@ import glob
 import pandas as pd
 
 # 获取所有 *_GrayVol.csv 文件的路径
-datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/PD_stru/*/*_GrayVol.csv')
+datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/HC_stru_brainnetom/*/*_GrayVol.csv')
 
 # 需要提取的列名列表
 columns_to_extract = [
@@ -25,6 +25,10 @@ concatenated_data = pd.DataFrame(columns=columns)
 for file in datapath:
     # 获取文件夹路径
     folder_path = '/'.join(file.split('/')[:-1])
+    print(folder_path)
+    #  方便 246 模版
+    subID = file.split('/')[-2]
+    folder_path = '/Volumes/QCI/NormativeModel/BrainProject/HC_stru/' + subID
     # 获取对应的 subcortialvolume.txt 文件路径
     subcortialvolume_file = f"{folder_path}/subcortialvolume.txt"
 
@@ -43,4 +47,4 @@ for file in datapath:
     concatenated_data = pd.concat([concatenated_data, gray_vol_data], axis=0, ignore_index=True)
 
 # 保存拼接后的数据到新的 CSV 文件
-concatenated_data.to_csv('./BrainProPDGrayVol.csv', index=False)
+concatenated_data.to_csv('./BrainProHCGrayVol_246.csv', index=False)

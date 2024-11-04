@@ -4,22 +4,25 @@ import glob
     因为 fmriprep 运行环境不同，导致输出的 freesurfer结果目录不同，所以写了两个代码来处理
 '''
 
-path = '/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sourcedata/freesurfer/*'
+path = '/Volumes/QCII/duilie_processed/duilie_HC_MDD_fmriprep/*/sourcedata/freesurfer'
 datapath = glob.glob(path)
 
 for i in datapath:
-
-    subID = i.split('/')[-1]
+    print(i)
+    subID = i.split('/')[-3]
     print(subID)
+    if 'sub-HC' in i:
+        continue
     if 'fsaverage' in i:
         continue
-    newpath = '/Volumes/QCI/NormativeModel/Data135/HC/Strufeature_Brainnetom/' + subID
+    newpath = '/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature_Brainnetom/' + subID
+
     if not os.path.exists(newpath):
         os.mkdir(newpath)
 
     inl = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
-            export SUBJECTS_DIR=''/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sourcedata/freesurfer'';\
+            export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_HC_MDD_fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_ca_label -l $SUBJECTS_DIR/'''+subID+'''/label/lh.cortex.label \
             '''+subID+''' \
@@ -29,7 +32,7 @@ for i in datapath:
         '''
     inr = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
-            export SUBJECTS_DIR=''/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sourcedata/freesurfer'';\
+            export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_HC_MDD_fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_ca_label -l $SUBJECTS_DIR/'''+subID+'''/label/rh.cortex.label \
             '''+subID+''' \
@@ -39,7 +42,8 @@ for i in datapath:
         '''
     incl = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
-            export SUBJECTS_DIR=''/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sourcedata/freesurfer'';\
+            export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_HC_MDD_fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
+
             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_anatomical_stats -a '''+newpath+'''/lh.BN_Atlas.annot \
             -f '''+newpath+'''/lh.BN_Atlas.txt \
@@ -47,7 +51,7 @@ for i in datapath:
         '''
     incr = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
-            export SUBJECTS_DIR=''/Volumes/QCII/Data135_processed/data135_HC_fmriprep_out/sourcedata/freesurfer'';\
+            export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_HC_MDD_fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_anatomical_stats -a '''+newpath+'''/rh.BN_Atlas.annot \
             -f '''+newpath+'''/rh.BN_Atlas.txt \
@@ -57,4 +61,5 @@ for i in datapath:
     os.system(inr)
     os.system(incl)
     os.system(incr)
+
 

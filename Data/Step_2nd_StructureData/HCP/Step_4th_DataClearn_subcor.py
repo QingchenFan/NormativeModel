@@ -2,7 +2,7 @@ import glob
 import pandas as pd
 
 # 获取所有 *_GrayVol.csv 文件的路径
-datapath = glob.glob('/Volumes/QCI/HCPData/HCP_Struc/hcp_res/*/*_GrayVol.csv')
+datapath = glob.glob('/Volumes/QCI/HCPData/HCP_Struc_246/*/*_GrayVol.csv')
 
 # 需要提取的列名列表
 columns_to_extract = [
@@ -27,9 +27,10 @@ for file in datapath:
     # 获取文件夹路径
     folder_path = file.split('/')[-2]
 
-
+    #  方便 246 模版
+    subID = file.split('/')[-2]
     # 获取对应的 subcortialvolume.txt 文件路径
-    subcortialvolume_file = "/Volumes/QCI/HCPData/HCP_Struc/hcp_subc/"+folder_path+"/subcortialvolume.txt"
+    subcortialvolume_file = "/Volumes/QCI/HCPData/HCP_Struc/hcp_subc/"+subID+"/subcortialvolume.txt"
 
     # 读取 *_GrayVol.csv 文件
     gray_vol_data = pd.read_csv(file, header=1)
@@ -46,4 +47,4 @@ for file in datapath:
     concatenated_data = pd.concat([concatenated_data, gray_vol_data], axis=0, ignore_index=True)
 
 # 保存拼接后的数据到新的 CSV 文件
-concatenated_data.to_csv('./HCPGrayVol.csv', index=False)
+concatenated_data.to_csv('./HCPGrayVol_246.csv', index=False)

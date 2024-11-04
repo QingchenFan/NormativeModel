@@ -28,7 +28,20 @@ for i in datapath:
             '''+ID+''' rh $SUBJECTS_DIR/'''+ID+'''/surf/rh.sphere.reg  \
             /n01dat01/kkwang/HCP/xicang/BN_Atlas_freesurfer/rh.BN_Atlas.gcs '''+newpath+'''/rh.BN_Atlas.annot
             '''
-    
-    os.system(lint)
-    os.system(rint)
+    incl = '''
+            export SUBJECTS_DIR='/n07dat01/OpenData/HCP1200/'''+ID+'''/T1w/';\
+            mris_anatomical_stats -a '''+newpath+'''/lh.BN_Atlas.annot \
+            -f '''+newpath+'''/lh.BN_Atlas.txt \
+            -b '''+ID+''' lh 
+        '''
+    incr = '''
+            export SUBJECTS_DIR='/n07dat01/OpenData/HCP1200/'''+ID+'''/T1w/';\
+            mris_anatomical_stats -a '''+newpath+'''/rh.BN_Atlas.annot \
+            -f '''+newpath+'''/rh.BN_Atlas.txt \
+            -b '''+ID+''' rh 
+        '''
+    # os.system(lint)
+    # os.system(rint)
+    os.system(incl)
+    os.system(incr)
     exit()

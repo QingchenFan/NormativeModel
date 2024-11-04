@@ -7,7 +7,7 @@ import pickle
 
 
 # --构建模型的x、y
-allHC = pd.read_csv('/n01dat01/kkwang/HCP/xicang/NormativeModel/FeatureData/allHC_GrayVol_combat.csv')
+allHC = pd.read_csv('/n01dat01/kkwang/HCP/xicang/NormativeModel/FeatureData/allHC_GrayVol246_combat_final.csv')
 anding = allHC.loc[allHC['site'] == 'anding']                                               # 获取site = "anding"
                                                                       # 加一列，标识站点 - 0
 allHCP = allHC.loc[allHC['site'] != 'anding']    # 获取其他站点的数据(此时的allHC,从allHC中排除了
@@ -18,18 +18,21 @@ allHCP = allHC.loc[allHC['site'] != 'anding']    # 获取其他站点的数据(�
 # print('brainRegion >>>>> ',brainRegion)
 # print('index >>>>> ',index)
 brainRegion = allHC.columns.tolist()
-del brainRegion[0:5]
+#del brainRegion[0:6]
 
-idps = brainRegion
+idps = brainRegion[7:]
+print('idps--',len(idps))
+print(idps)
 
 # --构建模型的x、y
-pro_dir = '/n01dat01/kkwang/HCP/xicang/NormativeModel/Results/HC_MDD/GrayVol/'
+pro_dir = '/n01dat01/kkwang/HCP/xicang/NormativeModel/Results/HC_MDD/GrayVol_246_1022/'
 if not os.path.isdir(pro_dir):
     os.mkdir(pro_dir)
 os.chdir(pro_dir)
 pro_dir = os.getcwd()
 allHC_X_train = (allHC[['sex','age']]).to_numpy(dtype=float)
 allHC_Y_train = allHC[idps].to_numpy(dtype=float)
+print(allHC_X_train.shape)
 
 with open('allHC_X_train.pkl', 'wb') as file:
     pickle.dump(pd.DataFrame(allHC_X_train), file)
@@ -51,7 +54,7 @@ outputsuffix = '_AllHC_estimate'
 # --训练模型
 ptk.normative.estimate(covfile=allHC_covfile,
                        respfile=allHC_respfile,
-                       cvfolds=10,
+                       cvfolds=5,
                        alg='gpr',
                        log_path=log_dir,
                        output_path=output_path,
@@ -59,13 +62,13 @@ ptk.normative.estimate(covfile=allHC_covfile,
                        savemodel=True)
 
 # 使用虚拟数据，构建轨迹线，首先是使用虚拟数据为测试集，得到yhat
-allHCtest_covariate = {'sex': [1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0],
-                          'age': [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37]}
+allHCtest_covariate = {'sex': [1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 1, 1, 0],
+                          'age': [19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 34, 35, 36, 37]}
 allHCtest_covariate = pd.DataFrame(data=allHCtest_covariate)
 with open('allHCtest_covariate.pkl', 'wb') as file:
     pickle.dump(pd.DataFrame(allHCtest_covariate), file)
 allHC_testcovfile = os.path.join(pro_dir, 'allHCtest_covariate.pkl')
-outputsuffix = '_allHC_test'
+outputsuffix = '_allHCtest'
 # --训练模型
 ptk.normative.estimate(covfile=allHC_covfile,
                        respfile=allHC_respfile,
@@ -79,7 +82,7 @@ ptk.normative.estimate(covfile=allHC_covfile,
 
 
 # ----MDD-Test----
-anding_mdd = pd.read_csv('/n01dat01/kkwang/HCP/xicang/NormativeModel/FeatureData/Data135MDD_GrayVol_combat.csv')
+anding_mdd = pd.read_csv('/n01dat01/kkwang/HCP/xicang/NormativeModel/FeatureData/allMDD_GrayVol246_combat_final.csv')
 
 anding_mdd_X_test = (anding_mdd[['sex','age']]).to_numpy(dtype=float)
 anding_mdd_Y_test = anding_mdd[idps].to_numpy(dtype=float)
@@ -98,7 +101,7 @@ if not os.path.isdir(output_path):
 if not os.path.isdir(log_dir):
     os.mkdir(log_dir)
 
-outputsuffix = '_AllHC_MDD'
+outputsuffix = '_AllMDD'
 # --训练模型
 ptk.normative.estimate(covfile=allHC_covfile,
                        respfile=allHC_respfile,
