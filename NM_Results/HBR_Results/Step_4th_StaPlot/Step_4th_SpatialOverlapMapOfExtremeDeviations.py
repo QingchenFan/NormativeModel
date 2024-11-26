@@ -5,12 +5,13 @@ from scipy.io import savemat
 import pandas as pd
 
 # 模板文件路径
-template_path = '/Users/qingchen/Documents/code/Data/FC/Schaefer2018_400Parcels_17Networks_order.dlabel.nii'
+template_path = '/Users/qingchen/Documents/code/Data/FC/Schaefer2018_400Parcels_17Networks_order.dscalar.nii'
 
 # 加载 dlabel.nii 模板文件
 template_image = nib.load(template_path)
 template_data = template_image.get_fdata()
 print("Template data shape:", template_data.shape)
+
 
 # 加载 CSV 文件
 csv_path = '/NM_Results/Result_GrayVol_GPR_10K_HCMDD/Step_3th_OutliersCount/Step3_Z_AllHCestimate_PositiveBrainRegionNum.csv'
