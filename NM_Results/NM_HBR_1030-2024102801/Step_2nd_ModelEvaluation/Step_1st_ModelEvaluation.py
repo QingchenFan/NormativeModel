@@ -22,13 +22,13 @@ def plotModel(ipath,opath,mark):
     plt.gca().tick_params(axis='y', which='both', width=0, labelsize=16)
 
 
-    plt.xlabel('SMSE',size=16)
+    plt.xlabel('MSLL',size=16)
     plt.ylabel('Density',size=16)
     plt.savefig(opath ,dpi=300)
     # 显示图形
     plt.show()
 
-ipath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1028/StaResults/hbr_estimate_GrayVol246_ResSum.csv'
-opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1028/StaResults/ModelEvaluation_SMSE.png'
-mark = 'SMSE_estimate'
+ipath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/StaResults/hbr_estimate_GrayVol246_ResSum.csv'
+opath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/StaResults/ModelEvaluation_MSLL.png'
+mark = 'MSLL'
 plotModel(ipath,opath,mark)
