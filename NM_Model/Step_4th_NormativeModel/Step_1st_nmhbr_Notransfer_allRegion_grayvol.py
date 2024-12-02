@@ -3,14 +3,15 @@ import pandas as pd
 import pcntoolkit as ptk
 import numpy as np
 import pickle
-
+#
 # # a simple function to quickly load pickle files
 def ldpkl(filename: str):
     with open(filename, 'rb') as f:
         return pickle.load(f)
 # from matplotlib import pyplot as plt
 #
-allHC = pd.read_csv('/Volumes/QCI/NormativeModel/FeatureData/StructureFeature_246/allstruc/nocombat/allHC_GrayVol246_nocombat_final1030.csv')
+allHC = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/Feature/'
+                    'allHC_GrayVol246_nocombat_final1129.csv')
                 # 获取其他站点名称
 
 
@@ -20,7 +21,7 @@ allHC_tr = allHC.loc[tr]
 allHC_te = allHC.loc[te]                            # 将fcon中数据一分为2 ture false
 print(" -Data Done ! -")
 #TODO:
-processing_dir = "/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/NMResults/"
+processing_dir = "/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/NMResults/"
 #
 if not os.path.isdir(processing_dir):
     os.mkdir(processing_dir)
@@ -32,10 +33,10 @@ allHC_te.to_csv(processing_dir + '/allHC_te.csv')
 brainRegion = allHC.columns.tolist()
 idps = brainRegion[6:]
 
-# print(len(idps))
+# # print(len(idps))
 os.chdir(processing_dir)
 pro_dir = os.getcwd()
-#  ---构建训练集---
+# #  ---构建训练集---
 X_train = (allHC_tr['age']/100).to_numpy(dtype=float)
 Y_train = allHC_tr[idps].to_numpy(dtype=float)
 batch_effects_train = allHC_tr[['sitenum','sex']].to_numpy(dtype=int)
@@ -70,7 +71,7 @@ trbefile = os.path.join(pro_dir, 'trbefile.pkl')      # training batch effects f
 tsbefile = os.path.join(pro_dir, 'tsbefile.pkl')      # testing batch effects file
 
 output_path = os.path.join(pro_dir, 'Models/')    #  output path, where the models will be written
-
+#
 log_dir = os.path.join(pro_dir, 'log/')
 if not os.path.isdir(output_path):
     os.mkdir(output_path)
@@ -100,8 +101,8 @@ ptk.normative.estimate(covfile=covfile,
 
 
 #  ---构建MDD测试集---
-allMDD = pd.read_csv('/Volumes/QCI/NormativeModel/FeatureData/StructureFeature_246/allstruc/nocombat/'
-                     'allMDDGrayVol246_sum_1030.csv')
+allMDD = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/Feature/'
+                     'allMDDGrayVol246_sum_1129.csv')
 
 X_mdd_test = (allMDD['age']/100).to_numpy(dtype=float)
 Y_mdd_test = allMDD[idps].to_numpy(dtype=float)

@@ -17,12 +17,14 @@ label=template.get_fdata()
 label[label > 210] -= 210
 
 # 找到脑区对应的索引
-Regionscsv_path = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/StaResults/hbr_estimate_GrayVol246_ResSum.csv'
+Regionscsv_path = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/StaResults/' \
+                  'hbr_estimate_GrayVol246_ResSum.csv'
 Regions_data = pd.read_csv(Regionscsv_path)
 region = Regions_data['Regions'][0:210]
 
 # 加载 CSV 文件
-csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/NM_HBR_1030-2024102801/Step_5th_Subtype/step4_group_subtype2_Regionmean.csv'
+csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/NM_HBR_1030-2024102801/Step_5th_Subtype/' \
+           'step4_group_subtype2_Regionmean.csv'
 weight_data = pd.read_csv(csv_path)
 print(weight_data.shape)
 

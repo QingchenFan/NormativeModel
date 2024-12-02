@@ -4,11 +4,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-d1 = pd.read_csv('./step2_group_subtype1.csv',index_col=0)
+d1 = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/StaResults/Subtype1.csv',index_col=0)
 d1=d1.iloc[:,1:].values
 print(d1)
 
-d2 = pd.read_csv('./step2_group_subtype2.csv',index_col=0)
+d2 = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1030/StaResults/Subtype2.csv',index_col=0)
 d2=d2.iloc[:,1:].values
 print(d2.shape)
 
@@ -44,7 +44,7 @@ cbar.set_label('Euclidean distance',rotation=270,labelpad=20)
 
 # 隐藏坐标轴
 
-plt.savefig('./step3_Intersubject.png',dpi=300)
+plt.savefig('./step3_Intersubject_2.png',dpi=300)
 
 # 显示图形
 plt.show()
