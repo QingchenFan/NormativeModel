@@ -10,8 +10,8 @@ def ldpkl(filename: str):
         return pickle.load(f)
 # from matplotlib import pyplot as plt
 #
-allHC = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1128/Feature/'
-                    'allHC_GrayVol246_nocombat_final1128.csv')
+allHC = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1217/Feature/'
+                    'AllHC_GrayVol_all246_III.csv')
                 # 获取其他站点名称
 
 
@@ -21,12 +21,12 @@ allHC_tr = allHC.loc[tr]
 allHC_te = allHC.loc[te]                            # 将fcon中数据一分为2 ture false
 print(" -Data Done ! -")
 #TODO:
-processing_dir = "/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1128/NMResults/"
+processing_dir = "/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1217/NMResults/"
 #
 if not os.path.isdir(processing_dir):
     os.mkdir(processing_dir)
-allHC_tr.to_csv(processing_dir + '/allHC_tr2.csv')   # 加 2 防止复跑影响第一次的数据划分
-allHC_te.to_csv(processing_dir + '/allHC_te2.csv')
+# allHC_tr.to_csv(processing_dir + '/allHC_tr2.csv')   # 加 2 防止复跑影响第一次的数据划分
+# allHC_te.to_csv(processing_dir + '/allHC_te2.csv')
 
 #
 # #--要训练的脑区
@@ -39,7 +39,7 @@ pro_dir = os.getcwd()
 #  ---构建训练集---
 X_train = (allHC_tr['age']/100).to_numpy(dtype=float)
 Y_train = allHC_tr[idps].to_numpy(dtype=float)
-batch_effects_train = allHC_tr[['sitenum','sex']].to_numpy(dtype=int)
+batch_effects_train = allHC_tr[['sitenum', 'sex']].to_numpy(dtype=int)
 
 with open('X_train.pkl', 'wb') as file:
     pickle.dump(pd.DataFrame(X_train), file)
@@ -52,7 +52,7 @@ with open('trbefile.pkl', 'wb') as file:
 X_test = (allHC_te['age']/100).to_numpy(dtype=float)
 Y_test = allHC_te[idps].to_numpy(dtype=float)
 
-batch_effects_test = allHC_te[['sitenum','sex']].to_numpy(dtype=int)
+batch_effects_test = allHC_te[['sitenum', 'sex']].to_numpy(dtype=int)
 with open('X_test.pkl', 'wb') as file:
     pickle.dump(pd.DataFrame(X_test), file)
 with open('Y_test.pkl', 'wb') as file:
@@ -95,15 +95,15 @@ ptk.normative.estimate(covfile=covfile,
                        log_path=log_dir,
                        binary=True,
                        output_path=output_path,
-                       testcov= testcovfile_path,
-                       testresp = testrespfile_path,
+                       testcov=testcovfile_path,
+                       testresp=testrespfile_path,
                        outputsuffix=outputsuffix,
                        savemodel=True)
 
 
 #  ---构建MDD测试集---
-allMDD = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1128/Feature/'
-                     'allMDDGrayVol246_sum_1128.csv')
+allMDD = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1217/Feature/'
+                     'AllMDD_GrayVol_all246_III.csv')
 
 X_mdd_test = (allMDD['age']/100).to_numpy(dtype=float)
 Y_mdd_test = allMDD[idps].to_numpy(dtype=float)

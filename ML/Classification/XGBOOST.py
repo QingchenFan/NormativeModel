@@ -4,37 +4,28 @@ from sklearn.model_selection import GridSearchCV
 import xgboost as xgb
 import numpy as np
 import pandas as pd
+Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/"
+                   "AllMDD_FirstEpisode_xg.csv")
 
-# Data = pd.read_csv("/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/Results/INTvalue_HCMDD.csv")
-#
-# brainRegion = Data.columns.tolist()
-# del brainRegion[:2]
-#
-# x_data = np.array(Data[brainRegion])
-# y_label = np.array(Data['disorder'])
-Data = pd.read_csv("/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/Results/INTvalue_HCMDD.csv")
 
-region = pd.read_csv("/Volumes/QC/INT/INT_BN246_HC135BP_allMDD/Results/signifRegion.csv")
-regions = region.columns.tolist()
-MDDData = Data[Data['disorder'] == 1].sample(n=222)
-HCData = Data[Data['disorder'] == 0]
+# all Regions feature
+brainRegion = Data.columns.tolist()
+del brainRegion[:2]
 
-Data = pd.concat([HCData, MDDData])
+x_data = np.array(Data[brainRegion])
 
-x_data = np.array(Data[regions])
-
-y_label = np.array(Data['disorder'])
+y_label = np.array(Data['FirstEpisode'])
 
 acc_res = []
 kappa_res = []
-kf = KFold(n_splits=5,shuffle=True,random_state=6)
+kf = KFold(n_splits=5, shuffle=True, random_state=6)
 for train_index, test_index in kf.split(x_data):
     # split data
     X_train, X_test = x_data[train_index, :], x_data[test_index, :]
     y_train, y_test = y_label[train_index], y_label[test_index]
 
     # Model
-    Hyper_param = {'max_depth': range(3,5,10),
+    Hyper_param = {'max_depth': range(3, 5, 10),
                    'learning_rate': [0.01, 0.05, 0.08, 0.1, 0.12],
                    }
 

@@ -4,7 +4,7 @@ from sklearn.ensemble import BaggingClassifier, GradientBoostingClassifier
 import pandas as pd
 from sklearn.metrics import r2_score, make_scorer, accuracy_score, cohen_kappa_score
 
-Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1128/StaResults/AllMDD_FirstEpisode.csv")
+Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/AllMDD_FirstEpisode.csv")
 
 
 # all Regions feature
@@ -15,7 +15,7 @@ x_data = np.array(Data[brainRegion])
 
 y_label = np.array(Data['FirstEpisode'])
 
-kf = KFold(n_splits=5, shuffle=True,random_state=6)
+kf = KFold(n_splits=5, shuffle=True, random_state=6)
 
 acc_res = []
 kappa_res = []

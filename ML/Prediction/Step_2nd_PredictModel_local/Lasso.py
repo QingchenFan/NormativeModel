@@ -13,7 +13,7 @@ from sklearn.linear_model import Lasso
 import sys
 
 import statsmodels.formula.api as sm
-import pingouin as pg
+#import pingouin as pg
 
 def my_scorer(y_true, y_predicted):
     mae = np.mean(np.abs(y_true - y_predicted))
@@ -88,7 +88,7 @@ def PLSPrediction_Model(data_list, dimention, weightpath, Permutation, kfold, da
         # 网格交叉验证
         # Model
         lasso = Lasso()
-        param_grid = {'alpha':[1,2,5,10]}
+        param_grid = {'alpha': [1, 2, 5, 10]}
         param_grid = {'alpha': np.logspace(-4, 4, 50)}
 
         cv_time = 2
@@ -194,12 +194,13 @@ def ToolboxCSV_server(savePath, listbox, Time, filename='filename.csv'):
 
 
 if __name__ == '__main__':
-    datapath = '/Volumes/QCI/NormativeModel/Prediction/Data/sum_HAMD.csv'
-    labelpath = '/Volumes/QCI/NormativeModel/Prediction/Data/sum_HAMD.csv'
-    dimention = 'HAMD'
-    outputdatapath = '/Volumes/QCI/NormativeModel/Prediction/Result/HAMD_PLSR_Result/result/'
-    weightpath = '/Volumes/QCI/NormativeModel/Prediction/Result/HAMD_PLSR_Result/model_weight/'
+    datapath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/PDND_Zvalue_HAMD_52w.csv'
+    labelpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/PDND_Zvalue_HAMD_52w.csv'
+    dimention = 'HAMD17_52w'
+    outputdatapath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/Predict/'
+
+    weightpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/Predict/mw'
 
     data_list = LoadData(datapath, labelpath, dimention, covariatespath=0)
-    for i in range(1,10):
+    for i in range(1, 101):
         PLSPrediction_Model(data_list, dimention, weightpath, Permutation=0, kfold=2, datamark='HAMD_Lasso', outputdatapath=outputdatapath, count=i, Time=4)

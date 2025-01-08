@@ -13,7 +13,7 @@ from sklearn.linear_model import Lasso,Ridge
 import sys
 
 import statsmodels.formula.api as sm
-import pingouin as pg
+#import pingouin as pg
 
 def my_scorer(y_true, y_predicted):
     mae = np.mean(np.abs(y_true - y_predicted))
@@ -88,17 +88,17 @@ def PLSPrediction_Model(data_list, dimention, weightpath, Permutation, kfold, da
         # 网格交叉验证
         # Model
         ridge = Ridge()
-        param_grid = {'alpha':[0.02, 0.01, 0.1, 0.12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        param_grid = {'alpha': [0.02, 0.01, 0.1, 0.12, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         #param_grid = {'alpha': np.logspace(-6, 6, 13)}
         cv_time = 2
         predict_model = GridSearchCV(ridge, param_grid=param_grid, verbose=6, cv=cv_time)
-        predict_model.fit(subjects_data_train, y_train)
+        predict_model.fit(X_train, y_train)
         best_model = predict_model.best_estimator_
         # weight
         feature_weight = best_model.coef_
         feature_weight_res = np.add(feature_weight_res, feature_weight)
 
-        Predict_Score = best_model.predict(subjects_data_test)
+        Predict_Score = best_model.predict(X_test)
 
         #ToolboxCSV_server(outputdatapath, Predict_Score, Time,'Predict_Score_bagging_' + dimention + '_' + str(Time) + '_' +str(count) + '_' + str(epoch) + '.csv')
         # TODO: Controlling covariates and save parCorr
@@ -193,12 +193,13 @@ def ToolboxCSV_server(savePath, listbox, Time, filename='filename.csv'):
 
 
 if __name__ == '__main__':
-    datapath = '/Volumes/QCI/NormativeModel/Prediction/Data/sum_HAMD.csv'
-    labelpath = '/Volumes/QCI/NormativeModel/Prediction/Data/sum_HAMD.csv'
-    dimention = 'HAMD'
-    outputdatapath = '/Volumes/QCI/NormativeModel/Prediction/Result/HAMD_PLSR_Result/result/'
-    weightpath = '/Volumes/QCI/NormativeModel/Prediction/Result/HAMD_PLSR_Result/model_weight/'
+    datapath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/PDND_Zvalue_HAMD_52w.csv'
+    labelpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/PDND_Zvalue_HAMD_52w.csv'
+    dimention = 'HAMD17_52w'
+    outputdatapath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/Predict/'
+
+    weightpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/Predict/mw'
 
     data_list = LoadData(datapath, labelpath, dimention, covariatespath=0)
-    for i in range(1,10):
+    for i in range(1, 101):
         PLSPrediction_Model(data_list, dimention, weightpath, Permutation=0, kfold=2, datamark='HAMD_Ridge', outputdatapath=outputdatapath, count=i, Time=5)

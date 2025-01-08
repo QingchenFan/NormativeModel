@@ -3,10 +3,11 @@ import pandas as pd
 # 读取数据文件
 file_path = '/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/allstrucIII/nocombat/new_combat/allHC_GrayVol_combat_new.csv'
 #file_path = "/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/StructureFeature_246/allstruc/combat/allHC_GrayVol246_combat_temp.csv"
-file_path = "/Volumes/QCI/NormativeModel/FeatureData/StructureFeature/StructureFeature_246/allstruc/nocombat/allHCGrayVol246_sum.csv"
+file_path = "/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1216/Feature/AllHC_GrayVol_all246_II.csv"
+
 data = pd.read_csv(file_path)
 subid = data['subID']
-data = data.iloc[:,6:]
+data = data.iloc[:,4:]
 
 
 # 计算每个脑区的组均值和标准差

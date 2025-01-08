@@ -12,11 +12,11 @@ path = '/Volumes/QCI/NormativeModel/Data135/MDD/Data135_Schaefer400FC_mat/*/sub*
 
 dataList = glob.glob(path)
 databox = []
-box = np.zeros([400,400])
+box = np.zeros([400, 400])
 for i in dataList:
     data = scio.loadmat(i)['data']
     fizFC = np.arctanh(data)
-    box = np.add(box,fizFC)
+    box = np.add(box, fizFC)
 
 mfizFC = box / len(dataList)
 mFC = np.tanh(mfizFC)
@@ -29,7 +29,7 @@ gp = GradientMaps(kernel='normalized_angle', approach='dm', alignment='procruste
 gp.fit(mFC)
 res = gp.gradients_
 
-savemat('Data135_MDD_GroupGradient2.mat', {'data2':res})
+savemat('Data135_MDD_GroupGradient2.mat', {'data2': res})
 
 # Plot brain gradient
 labeling = load_parcellation('schaefer', scale=400, join=True)

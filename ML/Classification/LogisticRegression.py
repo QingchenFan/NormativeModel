@@ -6,7 +6,7 @@ import pandas as pd
 
 
 
-Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1128/StaResults/AllMDD_FirstEpisode.csv")
+Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/AllMDD_FirstEpisode.csv")
 
 
 # all Regions feature
@@ -23,7 +23,7 @@ logreg = LogisticRegression()
 strat_k_fold = StratifiedKFold(n_splits=10)
 
 # Perform KFold cross-validation
-scores = cross_val_score(logreg, x_data, y_label, scoring='accuracy', verbose=6,cv=strat_k_fold)
+scores = cross_val_score(logreg, x_data, y_label, scoring='accuracy', verbose=6, cv=strat_k_fold)
 print(scores)
 # Calculate the mean accuracy
 mean_accuracy = scores.mean()

@@ -1,7 +1,7 @@
 import os
 import glob
 
-path = '/home/zhouyuan/fan/Data/brainproject_processed/fmriprep_out_HC/sourcedata/freesurfer/*'
+path = '/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/*'
 datapath = glob.glob(path)
 
 for i in datapath:
@@ -10,42 +10,68 @@ for i in datapath:
     print(subID)
     if 'fsaverage' in i:
         continue
-    newpath = '/home/zhouyuan/fan/Data/brainproject_processed/HC_stru_brainnetom/' + subID
+    newpath = '/Volumes/QCI/NormativeModel/BrainProject/NP_stru_brainnetomV14/' + subID
     if not os.path.exists(newpath):
         os.mkdir(newpath)
 
     inl = '''
-            export SUBJECTS_DIR=''/home/zhouyuan/fan/Data/brainproject_processed/fmriprep_out_HC/sourcedata/freesurfer'';\
+            export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+            export SUBJECTS_DIR=''/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/'';\
+            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_ca_label -l $SUBJECTS_DIR/'''+subID+'''/label/lh.cortex.label \
             '''+subID+''' \
             lh $SUBJECTS_DIR/'''+subID+'''/surf/lh.sphere.reg \
-            /home/zhouyuan/fan/BrainnetomeAtlas/BN_Atlas_freesurfer/lh.BN_Atlas.gcs \
+            /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/lh.BN_Atlas.gcs \
             '''+newpath+'''/lh.BN_Atlas.annot
         '''
     inr = '''
-            export SUBJECTS_DIR=''/home/zhouyuan/fan/Data/brainproject_processed/fmriprep_out_HC/sourcedata/freesurfer'';\
+            export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+            export SUBJECTS_DIR=''/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/'';\
+            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_ca_label -l $SUBJECTS_DIR/'''+subID+'''/label/rh.cortex.label \
             '''+subID+''' \
             rh $SUBJECTS_DIR/'''+subID+'''/surf/rh.sphere.reg \
-            /home/zhouyuan/fan/BrainnetomeAtlas/BN_Atlas_freesurfer/rh.BN_Atlas.gcs \
+            /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/rh.BN_Atlas.gcs \
             '''+newpath+'''/rh.BN_Atlas.annot
         '''
-    incl = '''
-            export SUBJECTS_DIR=''/home/zhouyuan/fan/Data/brainproject_processed/fmriprep_out_HC/sourcedata/freesurfer'';\
+    subint = '''
+            export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+            export SUBJECTS_DIR=''/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/'';\
+            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
+            mri_ca_label $SUBJECTS_DIR/'''+subID+'''/mri/brain.mgz  \
+            $SUBJECTS_DIR/'''+subID+'''/mri/transforms/talairach.m3z \
+           /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/BN_Atlas_subcortex.gca \
+            '''+newpath+'''/BN_Atlas_subcotex.mgz
+            '''
+    incl = ''' 
+            export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+            export SUBJECTS_DIR=''/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/'';\
+            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_anatomical_stats -a '''+newpath+'''/lh.BN_Atlas.annot \
             -f '''+newpath+'''/lh.BN_Atlas.txt \
-            -b '''+subID+''' lh 
+            -b '''+subID+''' lh
         '''
     incr = '''
-            export SUBJECTS_DIR=''/home/zhouyuan/fan/Data/brainproject_processed/fmriprep_out_HC/sourcedata/freesurfer'';\
+            export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+            export SUBJECTS_DIR=''/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/'';\
+            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_anatomical_stats -a '''+newpath+'''/rh.BN_Atlas.annot \
             -f '''+newpath+'''/rh.BN_Atlas.txt \
-            -b '''+subID+''' rh 
+            -b '''+subID+''' rh
         '''
+    incsub = '''
+                export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+                export SUBJECTS_DIR=''/Volumes/QCII/BrainProject/fmriprep_out_NPV14/sourcedata/freesurfer/'';\
+                source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
+                mri_segstats --seg ''' + newpath + '''/BN_Atlas_subcotex.mgz \
+                --ctab /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/BN_Atlas_246_LUT.txt \
+                --excludeid 0 --sum ''' + newpath + '''/BN_Atlas_subcotex.txt
+             '''
 
     os.system(inl)
     os.system(inr)
     os.system(incl)
     os.system(incr)
-    exit()
+    os.system(subint)
+    os.system(incsub)
 

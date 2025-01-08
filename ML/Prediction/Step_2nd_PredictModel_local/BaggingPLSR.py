@@ -12,7 +12,7 @@ from datetime import datetime
 import sys
 
 import statsmodels.formula.api as sm
-import pingouin as pg
+#import pingouin as pg
 
 def my_scorer(y_true, y_predicted):
     mae = np.mean(np.abs(y_true - y_predicted))
@@ -28,7 +28,7 @@ def LoadData(datapath, labelpath, dimention, covariatespath, Permutation=0):
 
     data_list = []
     data_files_all = pd.read_csv(datapath)
-    data_files_all = np.array(data_files_all.iloc[:,5:])
+    data_files_all = np.array(data_files_all.iloc[:, 2:])
 
     # Label
     label_files_all = pd.read_csv(labelpath)
@@ -90,10 +90,10 @@ def PLSPrediction_Model(data_list, dimention, weightpath, Permutation, kfold, da
 
         # 网格交叉验证
         my_func = make_scorer(my_scorer, greater_is_better=True)
-        cv_times = 2  # inner
+        cv_times = 5  # inner
 
         param_grid = {
-            'estimator__n_components': [1, 2, 3],
+            'estimator__n_components': [1, 2, 3, 4, 5, 6],
             'n_estimators': [8, 9]
         }
         predict_model = GridSearchCV(bagging, param_grid, scoring=my_func, verbose=6, cv=cv_times)
@@ -209,15 +209,31 @@ def ToolboxCSV_server(savePath, listbox, Time, filename='filename.csv'):
             file.write(str(tra))
             file.write('\n')
 
+def permutation_test(X, y, res, n_permutations=1000):
 
+    # 存储置换后的r值
+    permutation_r_values = []
+
+    for _ in range(n_permutations):
+        # 随机打乱目标变量 y
+        y_permuted = y.sample(frac=1).reset_index(drop=True)
+
+        # 对置换数据进行一次交叉验证
+        permuted_r = PLSPrediction_Model(X, y_permuted, n_runs=1)
+        permutation_r_values.append(permuted_r)
+
+    # 计算p值：原始r值大于等于置换r值的比例
+    p_value = np.mean(np.array(permutation_r_values) >= res)
+
+    return p_value
 if __name__ == '__main__':
-    datapath = '/Volumes/QCI/NormativeModel/Prediction/Data/sum_HAMD.csv'
-    labelpath = '/Volumes/QCI/NormativeModel/Prediction/Data/sum_HAMD.csv'
-    dimention = 'HAMD'
-    outputdatapath = '/Volumes/QCI/NormativeModel/Prediction/Result/HAMD_PLSR_Result/result/'
+    datapath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/PDND_Zvalue_HAMD_52w.csv'
+    labelpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/PDND_Zvalue_HAMD_52w.csv'
+    dimention = 'HAMD17_52w'
+    outputdatapath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/Predict/'
 
-    weightpath = '/Volumes/QCI/NormativeModel/Prediction/Result/HAMD_PLSR_Result/model_weight/'
+    weightpath = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/Longitudinal/Predict/mw'
 
     data_list = LoadData(datapath, labelpath, dimention, covariatespath=0)
-    for i in range(1,102):
+    for i in range(1, 102):
         PLSPrediction_Model(data_list, dimention, weightpath, Permutation=0, kfold=10, datamark='HAMD', outputdatapath=outputdatapath, count=i, Time=1)

@@ -8,7 +8,9 @@ import numpy as np
 import pandas as pd
 from sklearn import svm
 
-Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1128/StaResults/AllMDD_FirstEpisode.csv")
+
+Data = pd.read_csv("/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/AllMDD_FirstEpisode.csv")
+
 
 
 # all Regions feature
@@ -19,7 +21,7 @@ x_data = np.array(Data[brainRegion])
 
 y_label = np.array(Data['FirstEpisode'])
 
-kf = KFold(n_splits=10,shuffle=True)
+kf = KFold(n_splits=2,shuffle=True)
 acc_res = []
 kappa_res = []
 for train_index, test_index in kf.split(x_data):
@@ -30,12 +32,19 @@ for train_index, test_index in kf.split(x_data):
     y_train, y_test = y_label[train_index], y_label[test_index]
 
     rf = RandomForestClassifier()
+    # param_grid = {
+    #     'n_estimators': [50, 100, 200],
+    #     'max_depth': [10, 15, 20, 30],
+    #     'min_samples_split': [2, 5, 10]
+    # }
     param_grid = {
         'n_estimators': [50, 100, 200],
-        'max_depth': [10, 15, 20, 30],
-        'min_samples_split': [2, 5, 10]
+        'max_depth': [None, 10, 20, 30],
+        'min_samples_split': [2, 5, 10],
+        'min_samples_leaf': [1, 2, 4],
+        'max_features': ['sqrt', 'log2', None]
     }
-    predict_model = grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=5, scoring='accuracy')
+    predict_model = grid_search = GridSearchCV(estimator=rf, param_grid=param_grid, cv=2, verbose=6,scoring='accuracy')
 
     predict_model.fit(X_train, y_train)
     best_model = predict_model.best_estimator_

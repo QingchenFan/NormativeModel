@@ -1,6 +1,6 @@
 import glob
 import pandas as pd
-datapath = glob.glob('/Volumes/QCI/HCPData/HCP_Struc_246/*/*GrayVol.csv')
+datapath = glob.glob('/Volumes/QCI/HCPData/HCP_Struc_246/*/*_GrayVolSubcortical.csv')
 print(datapath)
 
 # 读取第一个 CSV 文件，获取列名
@@ -19,4 +19,4 @@ for file in datapath:
 
 # 打印拼接后的数据
 print(concatenated_data)
-#concatenated_data.to_csv('./HCPGrayVol_246.csv')
+concatenated_data.to_csv('./HCP_GrayVol_all246.csv')

@@ -1,31 +1,34 @@
 import glob
 import pandas as pd
-datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/HC_stru_brainnetom/*')
+#TODO： 此 Code 为每一个被试单独提取结构指标。（每个被试生成一个 csv）
+datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/NP_stru_brainnetom_V14/*')
 tmp = []
 
 for i in datapath:
     print(i)
     subID = i.split('/')[-1]
+    print(subID)
 
     rhp = i + '/rh.BN_Atlas.txt'
-    rh_data = pd.read_csv(rhp,skiprows = 60, delimiter = '\t',header=None)
+    rh_data = pd.read_csv(rhp, skiprows=60, delimiter='\t', header=None)
     rh_data.columns = ['Column1']
     rh_data = rh_data['Column1'].str.split(n=9, expand=True)
-    rh_data.columns = ['StructName', 'NumVert', 'SurfArea' ,'GrayVol', 'ThickAvg', 'ThickStd', 'MeanCurv', 'GausCurv', 'FoldInd', 'CurvInd']
-    rh = rh_data[['StructName','GrayVol']].T
+    rh_data.columns = ['StructName', 'NumVert', 'SurfArea', 'GrayVol', 'ThickAvg', 'ThickStd', 'MeanCurv', 'GausCurv', 'FoldInd', 'CurvInd']
+    rh = rh_data[['StructName', 'GrayVol']].T
 
     lhp = i + '/lh.BN_Atlas.txt'
-    lh_data = pd.read_csv(lhp,skiprows = 60, delimiter = '\t',header=None)
+    lh_data = pd.read_csv(lhp, skiprows=60, delimiter='\t', header=None)
     lh_data.columns = ['Column1']
     lh_data = lh_data['Column1'].str.split(n=9, expand=True)
-    lh_data.columns = ['StructName', 'NumVert', 'SurfArea' ,'GrayVol', 'ThickAvg', 'ThickStd', 'MeanCurv', 'GausCurv', 'FoldInd', 'CurvInd']
+    lh_data.columns = ['StructName', 'NumVert', 'SurfArea', 'GrayVol', 'ThickAvg', 'ThickStd', 'MeanCurv', 'GausCurv', 'FoldInd', 'CurvInd']
     lh = lh_data[['StructName', 'GrayVol']].T
 
-    res = pd.concat([rh,lh],axis=1, ignore_index=True)
+    res = pd.concat([rh, lh], axis=1, ignore_index=True)
     #print(res)
     res.insert(0, 'subId', [' ', subID])
     print(res)
-    res.to_csv(i +'/'+subID+'_GrayVol.csv',index=False)
+    res.to_csv(i +'/'+subID+'_GrayVol.csv', index=False)
+
 
 
 

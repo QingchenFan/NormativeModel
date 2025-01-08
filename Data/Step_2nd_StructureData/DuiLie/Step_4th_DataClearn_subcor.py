@@ -1,8 +1,8 @@
 import glob
 import pandas as pd
-
+# TODO: 此 Code 拼接结构指标csv 与 subcortical txt;拼接后生成一个 所有被试的CSV . 适用于拼接 14 subcortical
 # 获取所有 *_GrayVol.csv 文件的路径
-datapath = glob.glob('/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature_Brainnetom/*/*_GrayVol.csv')
+datapath = glob.glob('/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature_Brainnetom_V4/*/*_GrayVol.csv')
 
 # 需要提取的列名列表
 columns_to_extract = [
@@ -14,7 +14,7 @@ columns_to_extract = [
 
 # 读取第一个 CSV 文件，获取列名
 first_file = pd.read_csv(datapath[0])
-columns = list(first_file.iloc[0,:])
+columns = list(first_file.iloc[0, :])
 # 在列名中添加需要提取的列名
 columns.extend(columns_to_extract)
 
@@ -27,7 +27,7 @@ for file in datapath:
     folder_path = '/'.join(file.split('/')[:-1])
     #  方便 246 模版
     subID = file.split('/')[-2]
-    folder_path = '/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature_Schaefer400/' + subID
+    folder_path = '/Volumes/QCI/NormativeModel/DuiLie/MDD/DuiLie_Strufeature_Brainnetom_V4/' + subID
 
     # 获取对应的 subcortialvolume.txt 文件路径
     subcortialvolume_file = f"{folder_path}/subcortialvolume.txt"
@@ -47,4 +47,4 @@ for file in datapath:
     concatenated_data = pd.concat([concatenated_data, gray_vol_data], axis=0, ignore_index=True)
 
 # 保存拼接后的数据到新的 CSV 文件
-concatenated_data.to_csv('./DuiLieMDDGrayVol_246.csv', index=False)
+concatenated_data.to_csv('./DL_MDDGrayVol_BN224_V4.csv', index=False)

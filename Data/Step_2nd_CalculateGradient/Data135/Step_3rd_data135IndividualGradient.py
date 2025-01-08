@@ -20,7 +20,7 @@ for i in dataList:
 
     gp = GradientMaps(kernel='normalized_angle', approach='dm', alignment='procrustes', n_components=10,
                       random_state=0)
-    gp.fit(data,reference=ref['data'])
+    gp.fit(data, reference=ref['data'])
     res = gp.gradients_
 
     savemat('/Volumes/QCI/NormativeModel/Data135/MDD/Data135_IndividualGradient/'+subId+'_gradient.mat',{'data':res})
@@ -36,5 +36,5 @@ for i in dataList:
         # map the gradient to the parcels
         grad[i] = map_to_labels(res[:, i], labeling, mask=mask, fill=np.nan)
     picname = '/Volumes/QCI/NormativeModel/Data135/MDD/Data135_Gradientplot/'+subId+'.png'
-    plot_hemispheres(surf_lh, surf_rh,screenshot=True,filename=picname, array_name=grad, size=(2000, 800), cmap='coolwarm',
+    plot_hemispheres(surf_lh, surf_rh, screenshot=True, filename=picname, array_name=grad, size=(2000, 800), cmap='coolwarm',
                      color_bar=True, label_text=['Grad1', 'Grad2'], zoom=1)

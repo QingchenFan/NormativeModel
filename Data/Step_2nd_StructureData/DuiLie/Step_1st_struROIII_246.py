@@ -17,7 +17,7 @@ for i in datapath:
 
     if not os.path.exists(newpath):
         os.mkdir(newpath)
-
+    #
     inl = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
             export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_residue_MDD/fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
@@ -38,6 +38,15 @@ for i in datapath:
             /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/rh.BN_Atlas.gcs \
             '''+newpath+'''/rh.BN_Atlas.annot
         '''
+    subint = '''
+            export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+            export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_residue_MDD/fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
+            source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
+            mri_ca_label $SUBJECTS_DIR/'''+subID+'''/mri/brain.mgz  \
+            $SUBJECTS_DIR/'''+subID+'''/mri/transforms/talairach.m3z \
+            /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/BN_Atlas_subcortex.gca \
+            '''+newpath+'''/BN_Atlas_subcotex.mgz
+            '''
     incl = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
             export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_residue_MDD/fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
@@ -45,7 +54,7 @@ for i in datapath:
             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_anatomical_stats -a '''+newpath+'''/lh.BN_Atlas.annot \
             -f '''+newpath+'''/lh.BN_Atlas.txt \
-            -b '''+subID+''' lh 
+            -b '''+subID+''' lh
         '''
     incr = '''
             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
@@ -53,12 +62,22 @@ for i in datapath:
             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
             mris_anatomical_stats -a '''+newpath+'''/rh.BN_Atlas.annot \
             -f '''+newpath+'''/rh.BN_Atlas.txt \
-            -b '''+subID+''' rh 
+            -b '''+subID+''' rh
         '''
+    incsub = '''
+             export FREESURFER_HOME=/Applications/freesurfer/7.4.1; \
+             export SUBJECTS_DIR=''/Volumes/QCII/duilie_processed/duilie_residue_MDD/fmriprep/'''+subID+'''/sourcedata/freesurfer'';\
+             source /Applications/freesurfer/7.4.1/SetUpFreeSurfer.sh;\
+             mri_segstats --seg ''' + newpath + '''/BN_Atlas_subcotex.mgz \
+             --ctab /Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atlas_freesurfer/BN_Atlas_246_LUT.txt \
+             --excludeid 0 --sum ''' + newpath + '''/BN_Atlas_subcotex.txt
+             '''
     os.system(inl)
     os.system(inr)
     os.system(incl)
     os.system(incr)
+    os.system(subint)
+    os.system(incsub)
 
 
 
