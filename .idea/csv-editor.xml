@@ -577,6 +577,139 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/Step1_Z_AllMDD_GreaterOrLess_1.96num.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/Step3_Z_AllHCestimate_NegativeBrainRegionNum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/Step3_Z_AllMDD_NegativeBrainRegionNum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/Step5_MDDHCCond.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/step4_AllMDD_Regionmean.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_4th_StaPlot/Step6_allDataMDD_TOC_HAMD.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_4th_StaPlot/Step6_allDataMDD_Zvalue_HAMD.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_4th_StaPlot/Step6_allDataMDD_Zvalue_HAMDCorr.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_5th_Subtype/step2_group_subtype1.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_5th_Subtype/step2_group_subtype2.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_5th_Subtype/step4_group_subtype1_Regionmean.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_5th_Subtype/step4_group_subtype2_Regionmean.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/First_Medication_8w_noresp_Negative_LessThan_-196sum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/First_Medication_8w_noresp_Positive_GreaterThan_196sum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/First_Medication_8w_resp_Negative_LessThan_-196sum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/First_Medication_8w_resp_Positive_GreaterThan_196sum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/Medication/First_Medication_SSRI_8w_noresp_Positive_GreaterThan_196sum.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/Medication_8w_First_noresp_GreaterOrLess_1.96num.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/Medication_8w_First_resp_GreaterOrLess_1.96num.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/NM_Results/Result_GrayVol_GPR_10K_HCMDD/Step_3th_OutliersCount/Step1_Z_AllHCestimate_GreaterOrLess_1.96num.csv">
           <value>
             <Attribute>
@@ -585,13 +718,6 @@
           </value>
         </entry>
         <entry key="/NM_Results/Result_GrayVol_GPR_10K_HCMDD/Step_3th_OutliersCount/Step2_Z_AllMDD_LessThan_-196sum.csv">
-          <value>
-            <Attribute>
-              <option name="separator" value="," />
-            </Attribute>
-          </value>
-        </entry>
-        <entry key="/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/Check/GrayVol246_Z_mdd2.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

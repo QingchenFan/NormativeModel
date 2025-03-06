@@ -1,0 +1,37 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# 读取CSV文件
+data = pd.read_csv('/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1129/StaResults/subtype1_HAMD_explCovLC.csv',header=None)
+df_top10 = data.head(10)
+
+# 设置索引
+df_top10.index = range(1, 11)
+print(df_top10)
+fig, ax = plt.subplots(figsize=(10, 6))
+# 绘制折线图
+sns.lineplot(data=df_top10, x=df_top10.index, y=0)
+ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# 自定义x轴和y轴的线条粗细
+ax.spines['bottom'].set_linewidth(1.5)
+ax.spines['left'].set_linewidth(1.5)
+
+# 去掉x轴和y轴上的小刻度线
+ax.tick_params(axis='both', which='both', labelsize=12, bottom=False, top=False, left=False, right=False)
+
+# 设置图表标题和坐标轴标签
+ax.set_xlabel('PLS Component', size=14)
+ax.set_ylabel('Explained variance', size=14)
+
+# 自定义x轴和y轴的线条粗细
+ax.spines['bottom'].set_linewidth(1.5)
+ax.spines['left'].set_linewidth(1.5)
+
+# 去掉x轴和y轴上的小刻度线
+ax.tick_params(axis='both', which='both', labelsize=12, bottom=False, top=False, left=False, right=False)
+
+# 显示图形
+plt.show()

@@ -1,7 +1,7 @@
 import glob
 import pandas as pd
 # TODO: 此 Code 拼接所有被试生成一个csv( BN210 + BN subcortical 36)
-datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom/*/*GrayVolSubcortical.csv')
+datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom_V24/*/*GrayVolSubcortical.csv')
 # 读取第一个 CSV 文件，获取列名
 first_file = pd.read_csv(datapath[0])
 
@@ -20,4 +20,4 @@ for file in datapath:
 
 
 # 打印拼接后的数据
-concatenated_data.to_csv('./BrainProject_PDMDD_GrayVol_all246.csv')
+concatenated_data.to_csv('./PD_MDD_GrayVol_BN246_v24.csv')

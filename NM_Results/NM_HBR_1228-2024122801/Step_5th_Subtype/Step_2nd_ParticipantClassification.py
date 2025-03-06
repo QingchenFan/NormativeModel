@@ -36,10 +36,10 @@ x2 = alldata[label_pred == 1]
 # print(group)
 df = pd.DataFrame(x1)
 # print(df)
-df.to_csv('./step2_group2_subtype1.csv')
+df.to_csv('./step2_group_subtype1.csv')
 
 df1 = pd.DataFrame(x2)
-df1.to_csv('./step2_group2_subtype2.csv')
+df1.to_csv('./step2_group_subtype2.csv')
 
 # df2 = pd.DataFrame(x2)
 # df2.to_csv('./step2_group_subtype3.csv')

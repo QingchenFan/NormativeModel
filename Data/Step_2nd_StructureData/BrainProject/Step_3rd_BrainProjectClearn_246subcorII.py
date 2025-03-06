@@ -1,16 +1,16 @@
 import glob
 import pandas as pd
-# TODO: 此 Code 为每个被试拼接结构指标csv 与 subcortical txt .适用于拼接 BN 的 subcortical
+# TODO: 此 Code 为每个被试拼接结构指标csv（sub-01000034V14_GrayVol.csv） 与 subcortical txt .适用于拼接 BN 的 subcortical
 
 # TODO : 修改路径（HC、MDD），执行两次
-path = '/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom/*/*_GrayVol.csv'
+path = '/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom_V24/*/*_GrayVol.csv'
 data = glob.glob(path)
 for i in data:
 
     subId = i.split('/')[-2]
     print(subId)
 
-    subcpath ="/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom/"+subId+"/BN_Atlas_subcotex.txt"
+    subcpath ="/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom_V24/"+subId+"/BN_Atlas_subcotex.txt"
 
 
     # 步骤1: 读取BN_Atlas_subcotex.txt文件，并提取Volume_mm3和StructName列
@@ -52,6 +52,6 @@ for i in data:
     result_df = pd.concat([gray_vol_df, volume_struct_df_transposed], axis=1)
 
     # 保存新的CSV文件
-    result_df.to_csv('/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom/'+subId+'/'+subId+'_GrayVolSubcortical.csv', index=False)
+    result_df.to_csv('/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom_V24/'+subId+'/'+subId+'_GrayVolSubcortical.csv', index=False)
 
 

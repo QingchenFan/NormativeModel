@@ -1,7 +1,7 @@
 import glob
 import pandas as pd
 #TODO： 此 Code 为每一个被试单独提取结构指标。（每个被试生成一个 csv）
-datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/NP_stru_brainnetom_V14/*')
+datapath = glob.glob('/Volumes/QCI/NormativeModel/BrainProject/PD_stru_brainnetom_V03/*')
 tmp = []
 
 for i in datapath:
