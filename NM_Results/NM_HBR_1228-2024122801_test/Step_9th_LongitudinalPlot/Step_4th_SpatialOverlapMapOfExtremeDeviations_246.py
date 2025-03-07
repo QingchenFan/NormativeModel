@@ -8,31 +8,38 @@ template_path = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/BN_Atl
 template = template_path
 template = nib.load(template)
 label=template.get_fdata()
+
 label[label > 210] -= 210
 
 # 找到脑区对应的索引
-Regionscsv_path = '/Volumes/QCI/NormativeModel/Results/Result_GrayVol246_HBR_HCMDD_1228/StaResults/hbr_estimate_GrayVol246_ResSum.csv'
+Regionscsv_path = '/Users/qingchen/Documents/Data/template/BrainnetomeAtlas/region246_network_Yeo.csv'
 Regions_data = pd.read_csv(Regionscsv_path)
-region = Regions_data['Regions'][0:210]
-
+region = Regions_data['regions'][0:210]
 
 # 加载 CSV 文件 TODO: 负向 正向
 #csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/Step3_Z_AllMDD_NegativeBrainRegionNum.csv'
-csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/NM_HBR_1228-2024122801_test/Step_3th_OutliersCount/Step3_Z_AllMDD_PositiveBrainRegionNum.csv'
-
-weight_data = pd.read_csv(csv_path)
-print(weight_data.shape)
-
-sumRegion = weight_data.iloc[400:401, 2:].values
+csv_path = '/Users/qingchen/Documents/code/NormativeModel/NM_Results/NM_HBR_1228-2024122801_test/Step_8th_Longitudinal/Step4_Z8w_MDD_NegativeBrainRegionNum.csv'
+rnum = pd.read_csv(csv_path)
 
 # 创建一个新的数组用于存储映射值
 mapped_data = np.zeros_like(label)
 
 
 for i, regionname in enumerate(region):
+    print(regionname)
+    sumRegion = rnum[regionname][rnum.shape[0]-1:rnum.shape[0]]
+    sumRegion = sumRegion.item()
+
     i = i + 1
+    print('index-', i)
     index = np.where(label == i)
-    mapped_data[index] = sumRegion[0][i] / weight_data.shape[0]
+
+    r = sumRegion / rnum.shape[0]
+
+    if r < 0.025:
+        mapped_data[index] = 0
+    else:
+        mapped_data[index] = r
 
 # 检查映射后的数据形状
 print("Mapped data shape:", mapped_data.shape)
@@ -43,6 +50,6 @@ brain_model_axis = template.header.get_axis(1)
 scalar_header = nib.cifti2.Cifti2Header.from_axes((scalar_axis, brain_model_axis))
 scalar_img = nib.Cifti2Image(mapped_data, header=scalar_header)
 
-#scalar_img.to_filename('./step4_NegativeBrainRegionNum.dscalar.nii')
-scalar_img.to_filename('./step4_PositiveBrainRegionNum.dscalar.nii')
+scalar_img.to_filename('./step4_Z8w_MDD_NegativeBrainRegionNum.dscalar.nii')
+#scalar_img.to_filename('./step4_Z8w_MDD_PositiveBrainRegionNum.dscalar.nii')
 
